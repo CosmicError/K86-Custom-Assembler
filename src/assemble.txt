@@ -1,0 +1,25 @@
+; === ENTRY POINT ===
+ENTRY:
+
+; === Start of program code ===
+CODE:
+    ; Initialize registers
+    LODM 0x3                 ; AX = 3
+    MOV BX, AX              ; BX = 3
+    LOD MYVAR               ; AX = MYVAR
+
+    ; Add BX to AX in a loop
+    LOOP:
+    ADD AX, BX              ; AX += BX
+    DEC BX                  ; BX -= 1
+    JGZ LOOP                ; Jump to LOOP if BX > 0
+
+    ; Output result to port 0
+    OUT AX, R1
+
+    ; End of program
+    HLT
+
+; === Variable section ===
+DATA:
+    MYVAR = 5    ; (empty in this example, but can test with VAR1 = 42)
